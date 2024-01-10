@@ -2,7 +2,7 @@
 import { Environment, OrbitControls, OrthographicCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Background from "./Background";
 import Walls from "./Walls";
 import Pipes from "./Pipes";
@@ -13,9 +13,20 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
+const useWidth = () => {
+  const [width, setWidth] = useState(0)
+  const [height, setHeight] = useState(0)
+  const handleResize = () => {setWidth(window.innerWidth); setHeight(window.innerHeight)}
+  useEffect(() => {
+      handleResize()
+      window.addEventListener('resize', handleResize)
+      return () => window.removeEventListener('resize', handleResize)
+  }, [])
+  return width / height;
+}
 const Experience = () => {
 
-  const aspect = window.innerWidth / window.innerHeight;
+  const aspect = useWidth();
   const cameraProps = {
     left: -10 * aspect,   // Set left boundary of the viewing frustum
     right: 10 * aspect,   // Set right boundary of the viewing frustum
