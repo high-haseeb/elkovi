@@ -36,7 +36,6 @@ const Experience = () => {
             <Pipes itemColor={pipeColor} count={15}/>
           </Physics>
           <Background colorA={pipeColor}/>
-          <OrbitControls/>
         </Canvas>
       </Suspense>
     </div>
