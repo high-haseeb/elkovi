@@ -1,21 +1,17 @@
 import { useFrame } from "@react-three/fiber";
-import { EffectComposer, Vignette } from "@react-three/postprocessing";
 import { LayerMaterial, Color, Depth } from "lamina";
 import { useRef } from "react";
 import { BackSide } from "three";
 
 const Background = ({colorA}) => {
   const ref = useRef();
-  useFrame((delta) => {
+  useFrame(() => {
     if (ref.current) {
-      ref.current.rotation.x = 0.01;
+      ref.current.rotation.y += 0.01;
     }
   });
   return (
     <>
-      <EffectComposer>
-        <Vignette eskil={false} offset={0.1} darkness={1.1} />
-      </EffectComposer>
       <mesh scale={100} ref={ref}>
         <sphereGeometry args={[1, 64, 64]} />
         <LayerMaterial side={BackSide}>
@@ -31,6 +27,8 @@ const Background = ({colorA}) => {
           />
         </LayerMaterial>
       </mesh>
+      <pointLight color={colorA} intensity={100} position={[0,0,0]}/>
+      {/* <directionalLight color={colorA} intensity={2} ref={ref} /> */}
     </>
   );
 };

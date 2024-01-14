@@ -2,10 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-.navbar_btn_dark{
-  @apply rounded-3xl bg-[#2B2E3A] text-[#D4D5D7] px-4 py-4 font-[600] text-sm mx-2
+.nav_btn_lg{
+  @apply rounded-full px-5 h-10 font-[600] text-sm font-AeonikBold mx-2
+}
+.nav_btn_dark{
+  @apply bg-[#2B2E3A] text-[#D4D5D7] 
+}
+.nav_btn_light{
+  @apply text-[#2B2E3A] bg-brgray
 }
 
-.navbar_btn_light{
-  @apply rounded-3xl bg-[#E4E6EF] text-[#2B2E3A] px-4 py-4 font-[600] text-sm mx-2
+.nav_btn_sm{
+  @apply rounded-full bg-[#E4E6EF] text-[#2B2E3A]  w-10 h-10 mx-2
+}
+
+@font-face{
+  font-family: "Aeonik";
+  src: url('/fonts/Aeonik/AeonikTRIAL-Regular.otf') format('opentype');
+}
+
+@font-face{
+  font-family: "AeonikBold";
+  src: url('/fonts/Aeonik/AeonikTRIAL-Bold.otf') format('opentype');
 }
