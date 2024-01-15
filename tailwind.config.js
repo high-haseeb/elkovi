@@ -15,6 +15,7 @@ module.exports = {
     fontFamily: {
       Aeonik: ["Aeonik"],
       AeonikBold: ["AeonikBold"],
+      AeonikMedium : ["AeonikMedium"],
     },
   },
   plugins: [],

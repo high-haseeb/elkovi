@@ -1,28 +1,23 @@
-"use client";
-import React from "react";
-import { useTrail, a } from "@react-spring/web";
+import React  from 'react'
+import { useTrail, a } from '@react-spring/web'
 
-export const Trail = ({ open, children, height='3rem' }) => {
-  const items = React.Children.toArray(children);
+export const Trail = ({open, children, ...props }) => {
+  const items = React.Children.toArray(children)
   const trail = useTrail(items.length, {
-    config: { mass: 3, tension: 2000, friction: 200 },
+    // config: { mass: 1, tension: 2000, friction: 200 },
     opacity: open ? 1 : 0,
-    y: open ? 0 : 20,
-    from: { opacity: 0, y: 20 },
-  });
+    transform: `rotate(0deg)`,
+    y: 0,
+    from: { opacity: 0, y: 20 , transform: `rotate(4deg)` },
+  })
   return (
-    <div className={ `flex h-[${height}]` }>
-      {trail.map(({ ...style }, index) => {
-        return (
-          <div className='flex'>
-            <a.div key={index} style={style}>
-              {items[index]}
-            </a.div>{" "}
-            <div>&nbsp;</div>
-          </div>
-        );
-      })}
+    <div {...props}>
+      {trail.map(({ ...style }, index) => (
+        <a.div key={index} style={style}>
+          {items[index]}
+        </a.div>
+      ))}
     </div>
-  );
-};
+  )
+}
 

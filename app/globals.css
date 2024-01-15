@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .nav_btn_lg{
-  @apply rounded-full px-5 h-10 font-[600] text-sm font-AeonikBold mx-2
+  @apply rounded-full px-5 h-10 font-[600] text-sm mx-2 font-AeonikMedium
 }
 .nav_btn_dark{
   @apply bg-[#2B2E3A] text-[#D4D5D7] 
@@ -18,10 +18,13 @@
 
 @font-face{
   font-family: "Aeonik";
-  src: url('/fonts/Aeonik/AeonikTRIAL-Regular.otf') format('opentype');
+  src: url('/fonts/Aeonik/Aeonik-Regular.otf') format('opentype');
 }
-
 @font-face{
   font-family: "AeonikBold";
-  src: url('/fonts/Aeonik/AeonikTRIAL-Bold.otf') format('opentype');
+  src: url('/fonts/Aeonik/Aeonik-Bold.otf') format('opentype');
+}
+@font-face{
+  font-family: "AeonikMedium";
+  src: url('/fonts/Aeonik/Aeonik-Medium.otf') format('opentype');
 }

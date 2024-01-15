@@ -3,6 +3,7 @@ import { useSpring, a } from "@react-spring/web";
 
 const LetsTalk = () => {
   const [springs, api] = useSpring(() => ({
+    from:{x:0},
     x: -10,
   }));
 
