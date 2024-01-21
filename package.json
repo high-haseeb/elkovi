@@ -16,9 +16,9 @@
     "@react-three/rapier": "^1.2.1",
     "lamina": "^1.1.23",
     "next": "14.0.4",
-    "nprogress": "^0.2.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-intersection-observer": "^9.5.3",
     "three": "^0.160.0"
   },
   "devDependencies": {

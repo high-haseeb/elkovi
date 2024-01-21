@@ -4,6 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer } from '@react-three/drei'
 import { CuboidCollider, BallCollider, Physics, RigidBody } from '@react-three/rapier'
 import { EffectComposer, N8AO } from '@react-three/postprocessing'
+import { fetchData } from '../Loaders/loader'
 
 const accents = ['#4060ff', '#20ffa0', '#ff4060', '#ffcc00']
 const shuffle = (accent = 0) => [
@@ -27,13 +28,12 @@ export function Scene(props) {
     setJiggle(state => !state);
   }
   const connectors = useMemo(() => shuffle(accent), [accent])
-  console.log(connectors[2])
   return (
     <Canvas onClick={handleClick} shadows dpr={[1, 1.5]} gl={{ antialias: false }} camera={{ position: [0, 0, 15], fov: 17.5, near: 1, far: 20 }} {...props}>
       <color attach="background" args={['#141622']} />
       <ambientLight intensity={0.4} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-      <Physics /*debug*/ gravity={[0, 0, 0]}>
+      <Physics /* debug */ gravity={[0, 0, 0]}>
         <Pointer />
         {connectors.map((props, i) => <Connector key={i} {...props} jiggle={jiggle} />) /* prettier-ignore */}
         <Connector position={[10, 10, 5]} jiggle={jiggle} >
@@ -60,40 +60,30 @@ export function Scene(props) {
 function Connector({ position, children, vec = new THREE.Vector3(), scale, r = THREE.MathUtils.randFloatSpread, accent, jiggle, ...props }) {
 
   const jiggleTorqueScale = 10;
-  useEffect(()=>{
+  useEffect(() => {
     api.current?.applyImpulse(vec.copy(api.current.translation()).negate().multiplyScalar(-15))
 
     api.current?.applyTorqueImpulse({
-        x: Math.random() * jiggleTorqueScale,
-        y: Math.random() * jiggleTorqueScale,
-        z: Math.random() * jiggleTorqueScale
+      x: Math.random() * jiggleTorqueScale,
+      y: Math.random() * jiggleTorqueScale,
+      z: Math.random() * jiggleTorqueScale
     })
 
-  },[jiggle])
+  }, [jiggle])
 
   const api = useRef()
   const pos = useMemo(() => position || [r(10), r(10), r(10)], [])
-  const ambientScale = 0.1;
+
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta)
     api.current?.applyImpulse(vec.copy(api.current.translation()).negate().multiplyScalar(0.2))
 
-    api.current?.applyTorqueImpulse({
-        x: Math.random() * ambientScale,
-        y: Math.random() * ambientScale,
-        z: Math.random() * ambientScale
-    })
-    api.current?.applyImpulse({
-        x: Math.random() * ambientScale,
-        y: Math.random() * ambientScale,
-        z: Math.random() * ambientScale
-    })
   })
   return (
     <RigidBody linearDamping={4} angularDamping={1} friction={0.1} position={pos} ref={api} colliders={false}>
-      <CuboidCollider args={[0.38, 1.27, 0.38]} />
-      <CuboidCollider args={[1.27, 0.38, 0.38]} />
-      <CuboidCollider args={[0.38, 0.38, 1.27]} />
+      <CuboidCollider args={[0.32, 1, 0.32]} />
+      <CuboidCollider args={[1, 0.32, 0.32]} />
+      <CuboidCollider args={[0.32, 0.32, 1]} />
       {children ? children : <Model {...props} />}
       {accent && <pointLight intensity={4} distance={2.5} color={props.color} />}
     </RigidBody>
@@ -114,15 +104,20 @@ function Pointer({ vec = new THREE.Vector3() }) {
 
 function Model({ children, color = 'white', roughness = 0, ...props }) {
   const ref = useRef()
-  const { nodes, materials } = useGLTF('/cross.glb')
 
-  useLayoutEffect(()=>{
-      ref.current.material.color.set(color)
+  useEffect(() => {
+    fetchData("/assets/cross.buf").then((mesh) =>
+      ref.current.geometry = mesh.geometry
+    );
+  }, []);
+
+  useLayoutEffect(() => {
+    ref.current.material.color.set(color)
   }, [color])
 
   return (
-    <mesh ref={ref} castShadow receiveShadow scale={10} geometry={nodes.connector.geometry}>
-      <meshStandardMaterial metalness={0.2} roughness={roughness} map={materials.base.map} />
+    <mesh ref={ref} castShadow receiveShadow scale={1} >
+      <meshStandardMaterial metalness={0.2} roughness={roughness} /* map={materials.base.map} */ />
       {children}
     </mesh>
   )

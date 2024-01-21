@@ -1,7 +1,7 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense } from "react";
-import { Amanda } from "./Character";
+import React from "react";
+import  Astronaut  from "./Character";
 import { Environment, OrbitControls, ScrollControls } from "@react-three/drei";
 
 const Footer = () => {
@@ -10,7 +10,7 @@ const Footer = () => {
         <Canvas>
           <Environment preset="forest"/>
           <directionalLight position={[0, 1, 0]} intensity={2}/>
-          <Amanda scale={3} position={[0,-3,0]} />
+          <Astronaut scale={3} position={[0,-3,0]} />
         </Canvas>
     </div>
   );
