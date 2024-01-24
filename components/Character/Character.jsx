@@ -93,13 +93,12 @@ const Astronaut = () => {
     };
 
     fetchBuffers();
-    loadAnimationBuffer('/assets/astronaut_animations/astronaut_animations.buf').then(res => console.log(res))
   }, []);
 
   return (
     <>
       <OrbitControls />
-      <group ref={astronaut}>
+      <group ref={astronaut} scale={2} position={[0,-1 ,0]}>
         <mesh ref={astronaut_wearpack}></mesh>
         <mesh ref={astronaut_body}></mesh>
         <mesh ref={astronaut_glove_shoes}></mesh>
