@@ -54,7 +54,7 @@ const Menu = ({ open, onOutsideClick }) => {
     <>
       {hidden && (
         <div
-          className="absolute top-[7.5rem] right-0 w-[20rem] mr-20"
+          className="absolute top-[4rem] right-0 w-[20rem] "
           ref={ref}
         >
           {/* Contents */}

@@ -13,7 +13,7 @@ const Header = () => {
 
   const horizontalCallback = open => api.start({ transform: `translateX(${open ? '20%' : '0%'})` });
   return (
-    <div className="h-auto text-[9rem] w-full z-10 relative">
+    <div className=" text-[9rem] w-full z-10 relative">
       <Trail callback={horizontalCallback}>
         <a.div className="flex" style={horizontal}>
           <div>Beyond&nbsp;</div>
