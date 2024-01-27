@@ -99,7 +99,7 @@ function Pointer({ vec = new THREE.Vector3() }) {
 function Model({ children, index, size, roughness = 0, ...props }) {
   const ref = useRef();
 
-  const planetTexture = useTexture(`/textures/planet_${index + 1}.jpg`);
+  const planetTexture = useTexture(`/textures/planet_${index + 2}.jpg`);
   return (
     <mesh ref={ref} castShadow receiveShadow scale={1}>
       <sphereGeometry args={[size, 32, 32]} />
