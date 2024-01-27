@@ -1,7 +1,37 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
 
 const FeaturedWork = () => {
+  const ref = useRef(null);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 300,
+  });
+  const velocityFactor = useTransform(smoothVelocity, [-1000, 1000], [-45, 45], {
+    clamp: false,
+  });
+  const directionFactor = useRef(1);
+  useAnimationFrame((t, delta) => {
+    if (velocityFactor.get() !== 0) {
+      if (ref.current) {
+        let rect = ref.current.getBoundingClientRect();
+        if(rect.top > window.innerHeight / 2){
+          console.log('this is at the bottom')
+        }
+      }
+    }
+  });
+
   return (
     <div className="w-full h-auto">
       <div className="flex w-full justify-between items-center">
@@ -12,13 +42,18 @@ const FeaturedWork = () => {
           <br /> CLIENTS AND FRIENDS OVER THE YEARS
         </div>
       </div>
-      <div className="grid gap-8 grid-cols-2 grid-rows-3 w-full">
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
+      <div className="relative grid grid-rows-3 grid-cols-1 lg:grid-cols-2 gap-8 perspective-1000 w-full h-auto transform-style-3d">
+        {Array.from({ length: 6 }, (_, index) => (
+          <motion.div
+            ref={ref}
+            className={
+              "bg-lime-300 flex items-center shadow-lg text-center justify-center w-[30rem] rounded-3xl h-[27rem] text-black text-6xl"
+            }
+            style={{ rotateX: velocityFactor }}
+          >
+            Featured Work Image
+          </motion.div>
+        ))}
       </div>
     </div>
   );
@@ -26,19 +61,27 @@ const FeaturedWork = () => {
 
 export default FeaturedWork;
 
-const Item = () => {
+const Item = ({ rotation }) => {
+  const ref = useRef(null);
+  useAnimationFrame((t, delta) => {
+    if (ref.current && rotation.get() !== 0) {
+      const rect = ref.current.getBoundingClientRect();
+      if (rect.top > document.documentElement.clientHeight / 2) {
+        rotation.set(rotation.get() * -1);
+        console.log("this at the bottom of screen", rotation.get());
+      }
+    }
+  });
   return (
-    <div>
-      <div
-        className={`bg-lime-300 flex items-center justify-center text-black text-4xl h-[27rem] rounded-3xl`}
-      >
-        Featured Work Image
-      </div>
-      <ApperaingText className="text-sm mt-5 font-bold">
-        GAME • CONCEPT • WORK IN PROGRESS{" "}
-      </ApperaingText>
-      <ApperaingText className="text-5xl">Featured Work</ApperaingText>
-    </div>
+    <motion.div
+      ref={ref}
+      className={
+        "bg-lime-300 flex items-center shadow-lg text-center justify-center w-[30rem] rounded-3xl h-[27rem] text-black text-6xl"
+      }
+      style={{ rotateX: rotation }}
+    >
+      Featured Work Image
+    </motion.div>
   );
 };
 

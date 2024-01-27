@@ -4,6 +4,7 @@ import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from "three";
 import * as THREE from "three";
 import { loadAnimationBuffer } from "../Loaders/animationLoader";
+import { useFrame } from "@react-three/fiber";
 
 const Astronaut = () => {
   const astronaut = useRef();
@@ -95,10 +96,13 @@ const Astronaut = () => {
     fetchBuffers();
   }, []);
 
+  useFrame(()=>{
+    if(astronaut.current) astronaut.current.rotation.y += 0.01
+  })
   return (
     <>
       <OrbitControls />
-      <group ref={astronaut} scale={2} position={[0,-1 ,0]}>
+      <group ref={astronaut} scale={3} position={[0,-4 ,0]}>
         <mesh ref={astronaut_wearpack}></mesh>
         <mesh ref={astronaut_body}></mesh>
         <mesh ref={astronaut_glove_shoes}></mesh>

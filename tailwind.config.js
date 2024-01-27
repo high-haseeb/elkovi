@@ -19,5 +19,7 @@ module.exports = {
       AeonikMedium : ["AeonikMedium"],
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-3d')
+  ],
 };

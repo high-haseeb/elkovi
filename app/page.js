@@ -11,7 +11,8 @@ import ScrollText from "@/components/Navbar/ScrollText";
 import { Scene } from "@/components/Pipes/CrossPipes";
 import FeaturedWork from "@/components/FeaturedWork/FeaturedWork";
 import Connection from "@/components/ConnectingSection/Connection";
-// todo: complete this by today
+import Experience from "@/components/Experience/Experience";
+
 export default function Home() {
   const ref = useRef(null);
   return (
@@ -39,9 +40,20 @@ export default function Home() {
           <FeaturedVideo refForward={ref} />
         </div>
         <FeaturedWork />
-        <Connection />
+        <Connection className="" />
+        <div className="mt-80 w-full h-screen relative">
+          <Experience className="w-full h-full rounded-3xl" />
+        </div>
         {/* <div className="bg-brblue flex items-center justify-center w-full h-screen font-extrabold text-9xl"> this is the footer  </div> */}
-        <Footer />
+        <div className="relative">
+          <div className="absolute text-9xl font-bold text-center w-full h-full top-80">
+            HIRE       ME
+          </div>
+          <Footer />
+          <div className="absolute text-3xl font-bold text-center w-full h-full top-[40rem]">
+            made by haseeb
+          </div>
+        </div>
       </div>
     </Suspense>
   );

@@ -1,8 +1,8 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
-import React from "react";
+import React  from "react";
 import  Astronaut  from "./Character";
-import { Environment, OrbitControls, ScrollControls } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 
 const Footer = () => {
   return (

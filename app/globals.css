@@ -28,3 +28,59 @@
   font-family: "AeonikMedium";
   src: url('/fonts/Aeonik/Aeonik-Medium.otf') format('opentype');
 }
+ 
+.container {
+  margin: 0 auto;
+  width: 250px;
+  height: 200px;
+  position: relative;
+  perspective: 1000px;
+}
+
+.carousel {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.item {
+  display: block;
+  position: absolute;
+  background: #000;
+  width: 400px;
+  height: 100px;
+  line-height: 200px;
+  font-size: 5em;
+  text-align: center;
+  color: #FFF;
+  opacity: 0.95;
+  border-radius: 10px;
+}
+
+.a {
+  transform: rotateX(0deg) translateZ(250px);
+  background: #ed1c24;
+}
+.b {
+  transform: rotateX(60deg) translateZ(250px);
+  background: #0072bc;
+}
+.c {
+  transform: rotateX(120deg) translateZ(250px);
+  background: #39b54a;
+}
+.d {
+  transform: rotateX(180deg) translateZ(250px);
+  background: #f26522;
+}
+.e {
+  transform: rotateX(240deg) translateZ(250px);
+  background: #630460;
+} 
+.f {
+  transform: rotateX(300deg) translateZ(250px);
+  background: #8c6239;
+}
+
