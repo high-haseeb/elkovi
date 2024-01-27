@@ -31,7 +31,7 @@ export default function Home() {
           <Description />
           {/* <div className="h-full bg-brblue rounded-3xl"></div> */}
           {/* <Scene className="rounded-xl lg:rounded-3xl" /> */}
-          <Planets className="rounded-xl lg:rounded-3xl" />
+          <Planets className="h-full rounded-xl lg:rounded-3xl" />
           <ScrollText />
         </div>
       {/* </div> */}
