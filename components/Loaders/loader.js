@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import {  GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter'
 
 function onBufferLoad(buffer) {
   let schematicJsonSize = new Uint32Array(buffer, 0, 1)[0];
@@ -68,10 +69,11 @@ function onBufferLoad(buffer) {
   let material;
   let mesh;
   if (meshType === "Mesh") {
-    material = new THREE.MeshNormalMaterial({ flatShading: !hasNormal });
+    // material = new THREE.MeshNormalMaterial({ flatShading: !hasNormal });
+    material = new THREE.MeshStandardMaterial({ color: '#181818' });
     mesh = new THREE.Mesh(geometry, material);
   } else if (meshType === "LineSegments") {
-    material = new THREE.LineBasicMaterial();
+    material = new THREE.LineBasicMaterial({color: '#181818' });
     mesh = new THREE.LineSegments(geometry, material);
   } else {
     material = new THREE.PointsMaterial({
@@ -109,7 +111,6 @@ export const fetchData = async (
     percentage = (receivedLength / contentLength) * 100;
 
     onProgress(percentage);
-    console.log(`${percentage}%`);
   }
 
   let chunksAll = new Uint8Array(receivedLength); // (4.1)
@@ -122,4 +123,13 @@ export const fetchData = async (
   const mesh = onBufferLoad(chunksAll.buffer);
   return mesh;
 };
-fetchData("/assets/cross.buf");
+export const exportToGLTF = (mesh) => {
+  const exporter = new GLTFExporter();
+  exporter.parse(mesh, (result) => {
+    const blob = new Blob([JSON.stringify(result)], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'exportedModel.gltf';
+    link.click();
+  }, {});
+};

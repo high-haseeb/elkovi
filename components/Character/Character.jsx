@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { fetchData } from "../Loaders/loader";
+import { exportToGLTF, fetchData } from "../Loaders/loader";
 import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from "three";
 import * as THREE from "three";

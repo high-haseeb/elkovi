@@ -8,7 +8,7 @@ const About = () => {
      <Navbar />
       <Scene/>
       <ScrollText />
-      <div className="absolute text-[17rem] font-extrabold tracking-widest bottom-0 right-1/2 translate-x-1/2 w-auto leading-none">SAMTIK</div>
+      <div className="absolute lg:text-[17rem] text-7xl font-extrabold tracking-widest bottom-0 right-1/2 translate-x-1/2 w-auto leading-none">SMATIK</div>
     </div>
   );
 };
@@ -17,7 +17,7 @@ export default About;
 
 const ScrollText = (props) => {
   return (
-    <div className="w-full flex items-center justify-between font-bold text-3xl text-white absolute top-1/2 px-20" {...props}>
+    <div className="w-full flex items-center justify-between font-bold lg:text-3xl text-xl text-white absolute lg:top-1/2 top-2/3 lg:px-20" {...props}>
       <div>+</div>
       <div>+</div>
       <div>Scroll to Explore</div>
