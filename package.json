@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.9",
     "@react-spring/web": "^9.7.3",
     "@react-three/drei": "^9.93.0",
     "@react-three/fiber": "^8.15.13",

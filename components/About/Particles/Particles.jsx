@@ -9,7 +9,7 @@ const Scene = () => {
   return (
     <Canvas className="w-full h-full">
       {/* <Particles /> */}
-      <ScrollControls pages={2} >
+      <ScrollControls pages={2} damping={1} maxSpeed={1} >
         <Stars />
       </ScrollControls >
       <OrbitControls enableZoom={false}/>
