@@ -88,7 +88,7 @@ const Stars = () => {
   });
   return (
     <points ref={ref}>
-      <pointsMaterial size={0.03} />
+      <pointsMaterial size={0.02} />
     </points>
   );
 };
